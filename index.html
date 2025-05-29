@@ -36,8 +36,8 @@
       const nome = localStorage.getItem('usuarioNome') || 'Usuário';
       document.getElementById('boasVindas').textContent = `Bem-vindo, usuário!`;
 
-      const q = `'${FOLDER_ID}' in parents and mimeType='application/pdf' and trashed=false`;
-      const endpoint = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(q)}&key=${API_KEY}&fields=files(id,name)&supportsAllDrives=true&includeItemsFromAllDrives=true`;
+      const q = `'1IuVi--l_OwMDnKoc2_U2UB6pfLFygleb' in parents and mimeType='application/pdf' and trashed=false`;
+      const endpoint = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(q)}&key=YOUR_API_KEY&fields=files(id,name)&supportsAllDrives=true&includeItemsFromAllDrives=true`;
 
       try {
         const res = await fetch(endpoint);
