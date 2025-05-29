@@ -26,7 +26,7 @@
     // Ao carregar a página
     window.onload = async () => {
       const nome = localStorage.getItem('usuarioNome') || 'Usuário';
-      document.getElementById('boasVindas').textContent = `Bem-vindo à base de arquivos NATARA, ${nome}!`;
+      document.getElementById('boasVindas').textContent = `Bem-vindo à base de arquivos NATARA, usuário!`;
 
       try {
         const res = await fetch('/api/arquivos');
