@@ -36,31 +36,35 @@
       const nome = localStorage.getItem('usuarioNome') || 'Usuário';
       document.getElementById('boasVindas').textContent = `Bem-vindo, usuário!`;
 
-      try {
-        const endpoint = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='application/pdf'&key=${API_KEY}&fields=files(id,name)`;
-        const res = await fetch(endpoint);
-        const data = await res.json();
-        const lista = document.getElementById('lista');
+try {
+  const endpoint = `https://www.googleapis.com/drive/v3/files?` +
+    `q='${FOLDER_ID}'+in+parents+and+mimeType='application/pdf'+and+trashed=false` +
+    `&key=${API_KEY}&fields=files(id,name)` +
+    `&supportsAllDrives=true&includeItemsFromAllDrives=true`;
 
-        if (!data.files || data.files.length === 0) {
-          const opt = document.createElement("option");
-          opt.textContent = "Nenhum PDF encontrado.";
-          opt.disabled = true;
-          lista.appendChild(opt);
-          return;
-        }
+  const res = await fetch(endpoint);
+  const data = await res.json();
+  const lista = document.getElementById('lista');
 
-        data.files.forEach(file => {
-          const opt = document.createElement('option');
-          opt.value = file.id;
-          opt.textContent = file.name;
-          lista.appendChild(opt);
-        });
-      } catch (error) {
-        alert("Erro ao carregar lista de arquivos.");
-        console.error(error);
-      }
-    };
+  if (!data.files || data.files.length === 0) {
+    const opt = document.createElement("option");
+    opt.textContent = "Nenhum PDF encontrado.";
+    opt.disabled = true;
+    lista.appendChild(opt);
+    return;
+  }
+
+  data.files.forEach(file => {
+    const opt = document.createElement('option');
+    opt.value = file.id;
+    opt.textContent = file.name;
+    lista.appendChild(opt);
+  });
+} catch (error) {
+  alert("Erro ao carregar lista de arquivos.");
+  console.error(error);
+}
+};
 
     function abrirItemSelecionado() {
       const id = document.getElementById('lista').value;
