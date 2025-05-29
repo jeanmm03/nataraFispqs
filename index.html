@@ -74,11 +74,13 @@
       }
     };
 
-    function abrirItemSelecionado() {
-      const id = document.getElementById('lista').value;
-      if (!id) return alert("Selecione um arquivo.");
-      window.open(`https://drive.google.com/file/d/${id}/preview`, '_blank');
-    }
+      function abrirItemSelecionado() {
+        const lista = document.getElementById('lista');
+        const id = lista.value;
+        if (!id) return alert("Selecione um arquivo.");
+        window.open(`https://drive.google.com/file/d/${id}/preview`, '_blank');
+        lista.value = ""; // Limpa a seleção após abrir
+      }
   </script>
 </body>
 </html>
