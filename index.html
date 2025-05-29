@@ -2,50 +2,65 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Visualizador de FISPQs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bem-vindo</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-  <div class="bg-white p-6 rounded-xl shadow-md w-full max-w-xl">
-    <h1 class="text-xl font-bold text-center mb-4">Lista de Arquivos PDF</h1>
-    <ul id="lista" class="space-y-2"></ul>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md text-center">
+    <h2 id="boasVindas" class="text-2xl font-bold text-gray-800 mb-6">Bem-vindo!</h2>
+    <p class="text-gray-600 mb-4">Selecione um arquivo PDF:</p>
+
+    <select id="lista" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-yellow-400 focus:outline-none">
+      <option value="">-- Selecione --</option>
+    </select>
+
+    <div class="mt-6">
+      <button onclick="abrirItemSelecionado()" class="w-full bg-yellow-400 text-black py-2 rounded-lg hover:bg-yellow-500">
+        Acessar
+      </button>
+    </div>
   </div>
 
   <script>
     const API_KEY = "AIzaSyDZhrfrzgn0PzfnkWQzOx6iu_6Pk_XWUDs";
     const FOLDER_ID = "1IuVi--l_OwMDnKoc2_U2UB6pfLFygleb";
 
-    async function listarArquivos() {
-      const endpoint = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='application/pdf'&key=${API_KEY}&fields=files(id,name)`;
+    window.onload = async () => {
+      const nome = localStorage.getItem('usuarioNome') || 'Usuário';
+      document.getElementById('boasVindas').textContent = `Bem-vindo, ${nome}!`;
 
       try {
+        const endpoint = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='application/pdf'&key=${API_KEY}&fields=files(id,name)`;
         const res = await fetch(endpoint);
         const data = await res.json();
+        const lista = document.getElementById('lista');
 
-        const lista = document.getElementById("lista");
         if (!data.files || data.files.length === 0) {
-          lista.innerHTML = "<li class='text-center text-gray-500'>Nenhum PDF encontrado.</li>";
+          const opt = document.createElement("option");
+          opt.textContent = "Nenhum PDF encontrado.";
+          opt.disabled = true;
+          lista.appendChild(opt);
           return;
         }
 
         data.files.forEach(file => {
-          const li = document.createElement("li");
-          li.innerHTML = `
-            <a href="https://drive.google.com/file/d/${file.id}/preview" target="_blank" 
-              class="block bg-yellow-400 hover:bg-yellow-500 text-black font-medium py-2 px-4 rounded-lg text-center">
-              ${file.name}
-            </a>`;
-          lista.appendChild(li);
+          const opt = document.createElement('option');
+          opt.value = file.id;
+          opt.textContent = file.name;
+          lista.appendChild(opt);
         });
-
       } catch (error) {
-        console.error("Erro ao listar arquivos:", error);
-        document.getElementById("lista").innerHTML = "<li class='text-red-500 text-center'>Erro ao carregar arquivos.</li>";
+        alert("Erro ao carregar lista de arquivos.");
+        console.error(error);
       }
-    }
+    };
 
-    listarArquivos();
+    function abrirItemSelecionado() {
+      const id = document.getElementById('lista').value;
+      if (!id) return alert("Selecione um arquivo.");
+      window.open(`https://drive.google.com/file/d/${id}/preview`, '_blank');
+    }
   </script>
 </body>
 </html>
