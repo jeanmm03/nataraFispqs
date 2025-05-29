@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bem-vindo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md text-center">
+    <h2 id="boasVindas" class="text-2xl font-bold text-gray-800 mb-6">Bem-vindo!</h2>
+    <p class="text-gray-600 mb-4">Selecione um arquivo:</p>
+
+    <select id="lista" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-yellow-400 focus:outline-none">
+      <option value="">-- Selecione --</option>
+    </select>
+
+    <div class="mt-6">
+      <button onclick="abrirItemSelecionado()" class="w-full bg-yellow-400 text-black py-2 rounded-lg hover:bg-yellow-500">
+        Acessar
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Ao carregar a página
+    window.onload = async () => {
+      const nome = localStorage.getItem('usuarioNome') || 'Usuário';
+      document.getElementById('boasVindas').textContent = `Bem-vindo, ${nome}!`;
+
+      try {
+        const res = await fetch('/api/arquivos');
+        const arquivos = await res.json();
+        const lista = document.getElementById('lista');
+
+        arquivos.forEach(item => {
+          const opt = document.createElement('option');
+          opt.value = item.arquivo;
+          opt.textContent = `${item.nome} (Atualizado: ${item.atualizado})`;
+          lista.appendChild(opt);
+        });
+      } catch (err) {
+        alert("Erro ao carregar lista de arquivos.");
+      }
+    };
+
+    function abrirItemSelecionado() {
+      const valor = document.getElementById('lista').value;
+      if (!valor) return alert("Selecione um arquivo.");
+      window.open(`/arquivos/${valor}`, '_blank');
+    }
+  </script>
+</body>
+</html>
