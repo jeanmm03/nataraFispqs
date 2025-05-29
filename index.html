@@ -34,17 +34,23 @@
 
     window.onload = async () => {
       const nome = localStorage.getItem('usuarioNome') || 'Usuário';
-      document.getElementById('boasVindas').textContent = `Bem-vindo, usuário!`;
-
-      const q = `'1IuVi--l_OwMDnKoc2_U2UB6pfLFygleb' in parents and mimeType='application/pdf' and trashed=false`;
-      const endpoint = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(q)}&key=YOUR_API_KEY&fields=files(id,name)&supportsAllDrives=true&includeItemsFromAllDrives=true`;
-
+      document.getElementById('boasVindas').textContent = `Bem-vindo, ${nome}!`;
+    
       try {
+        const query = encodeURIComponent(`'${FOLDER_ID}' in parents and mimeType='application/pdf' and trashed=false`);
+        const endpoint = `https://www.googleapis.com/drive/v3/files?q=${query}&key=${API_KEY}&fields=files(id,name)&supportsAllDrives=true&includeItemsFromAllDrives=true`;
+    
         const res = await fetch(endpoint);
+    
+        if (!res.ok) {
+          throw new Error(`Erro na requisição: ${res.status}`);
+        }
+    
         const data = await res.json();
         console.log("Arquivos recebidos:", data.files);
+    
         const lista = document.getElementById('lista');
-
+    
         if (!data.files || data.files.length === 0) {
           const opt = document.createElement("option");
           opt.textContent = "Nenhum PDF encontrado.";
@@ -52,7 +58,7 @@
           lista.appendChild(opt);
           return;
         }
-
+    
         data.files.forEach(file => {
           const opt = document.createElement('option');
           opt.value = file.id;
@@ -61,7 +67,7 @@
         });
       } catch (error) {
         alert("Erro ao carregar lista de arquivos.");
-        console.error(error);
+        console.error("Erro detalhado:", error);
       }
     };
 
