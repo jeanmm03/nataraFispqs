@@ -34,7 +34,7 @@
 
     window.onload = async () => {
       const nome = localStorage.getItem('usuarioNome') || 'Usuário';
-      document.getElementById('boasVindas').textContent = `Bem-vindo, ${nome}!`;
+      document.getElementById('boasVindas').textContent = `Bem-vindo, usuário!`;
 
       try {
         const endpoint = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='application/pdf'&key=${API_KEY}&fields=files(id,name)`;
