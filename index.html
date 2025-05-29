@@ -5,21 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bem-vindo</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md text-center">
-    <h2 id="boasVindas" class="text-2xl font-bold text-gray-800 mb-6">Bem-vindo!</h2>
-    <p class="text-gray-600 mb-4">Selecione um arquivo PDF:</p>
+<body class="bg-gradient-to-br from-yellow-100 to-white flex items-center justify-center min-h-screen px-4">
+  <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center">
+    <h2 id="boasVindas" class="text-3xl font-semibold text-gray-800 mb-4">Bem-vindo!</h2>
+    <p class="text-gray-600 mb-6">Selecione um arquivo PDF para visualizar:</p>
 
-    <select id="lista" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-yellow-400 focus:outline-none">
+    <select id="lista" class="w-full border border-gray-300 rounded-lg p-3 mb-6 text-gray-700 focus:ring-yellow-400 focus:outline-none transition duration-150 ease-in-out">
       <option value="">-- Selecione --</option>
     </select>
 
-    <div class="mt-6">
-      <button onclick="abrirItemSelecionado()" class="w-full bg-yellow-400 text-black py-2 rounded-lg hover:bg-yellow-500">
-        Acessar
-      </button>
-    </div>
+    <button
+      onclick="abrirItemSelecionado()"
+      class="w-full bg-yellow-400 text-black font-medium py-3 rounded-lg hover:bg-yellow-500 transition duration-200 ease-in-out"
+    >
+      Acessar Arquivo
+    </button>
   </div>
 
   <script>
@@ -31,36 +37,4 @@
       document.getElementById('boasVindas').textContent = `Bem-vindo, ${nome}!`;
 
       try {
-        const endpoint = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='application/pdf'&key=${API_KEY}&fields=files(id,name)`;
-        const res = await fetch(endpoint);
-        const data = await res.json();
-        const lista = document.getElementById('lista');
-
-        if (!data.files || data.files.length === 0) {
-          const opt = document.createElement("option");
-          opt.textContent = "Nenhum PDF encontrado.";
-          opt.disabled = true;
-          lista.appendChild(opt);
-          return;
-        }
-
-        data.files.forEach(file => {
-          const opt = document.createElement('option');
-          opt.value = file.id;
-          opt.textContent = file.name;
-          lista.appendChild(opt);
-        });
-      } catch (error) {
-        alert("Erro ao carregar lista de arquivos.");
-        console.error(error);
-      }
-    };
-
-    function abrirItemSelecionado() {
-      const id = document.getElementById('lista').value;
-      if (!id) return alert("Selecione um arquivo.");
-      window.open(`https://drive.google.com/file/d/${id}/preview`, '_blank');
-    }
-  </script>
-</body>
-</html>
+        const endpoint = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType
