@@ -3,28 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bem-vindo</title>
+  <title data-i18n="title">Bem-vindo</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    /* Spinner style */
+    .spinner {
+      border: 4px solid rgba(0,0,0,0.1);
+      border-left-color: #fbbf24; /* yellow-400 */
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
+
+  <!-- Google Analytics 4 basic setup -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-XXXXXXXXXX'); // Substitua pelo seu ID GA4 real
+  </script>
 </head>
 <body class="bg-gradient-to-br from-yellow-100 to-white flex items-center justify-center min-h-screen px-4">
-  <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center">
-    <h2 id="boasVindas" class="text-3xl font-semibold text-gray-800 mb-4">Bem-vindo!</h2>
-    <p class="text-gray-600 mb-6">Selecione um arquivo PDF para visualizar:</p>
 
-    <select id="lista" class="w-full border border-gray-300 rounded-lg p-3 mb-6 text-gray-700 focus:ring-yellow-400 focus:outline-none transition duration-150 ease-in-out">
-      <option value="">-- Selecione --</option>
-    </select>
+  <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center relative">
+
+    <!-- Language switch -->
+    <div class="absolute top-4 right-4 flex space-x-2">
+      <button id="btn-pt" class="px-3 py-1 rounded bg-yellow-400 text-black font-semibold hover:bg-yellow-500 transition" aria-label="Português">PT</button>
+      <button id="btn-en" class="px-3 py-1 rounded bg-gray-300 text-gray-800 font-semibold hover:bg-gray-400 transition" aria-label="English">EN</button>
+    </div>
+
+    <h2 id="boasVindas" class="text-3xl font-semibold text-gray-800 mb-4" data-i18n="welcome">Bem-vindo!</h2>
+    <p class="text-gray-600 mb-6" data-i18n="selectPdf">Selecione um arquivo PDF para visualizar:</p>
+
+    <div class="relative inline-block w-full mb-6 text-left">
+      <select id="lista" class="w-full border border-gray-300 rounded-lg p-3 pr-10 text-gray-700 focus:ring-yellow-400 focus:outline-none transition duration-150 ease-in-out" aria-label="Lista de arquivos PDF" disabled>
+        <option value="">{-- Selecione --}</option>
+      </select>
+
+      <!-- Icon dropdown -->
+      <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+
+      <!-- Loading spinner -->
+      <div id="spinner" class="absolute inset-y-0 right-10 flex items-center hidden">
+        <span class="spinner" aria-hidden="true"></span>
+      </div>
+    </div>
 
     <button
+      id="btn-acessar"
       onclick="abrirItemSelecionado()"
-      class="w-full bg-yellow-400 text-black font-medium py-3 rounded-lg hover:bg-yellow-500 transition duration-200 ease-in-out"
+      class="w-full bg-yellow-400 text-black font-medium py-3 rounded-lg hover:bg-yellow-500 transition duration-200 ease-in-out flex justify-center items-center"
+      disabled
+      aria-label="Acessar Arquivo"
     >
-      Acessar Arquivo
+      <!-- PDF icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      <span data-i18n="accessFile">Acessar Arquivo</span>
     </button>
   </div>
 
@@ -32,9 +86,140 @@
     const API_KEY = "AIzaSyDZhrfrzgn0PzfnkWQzOx6iu_6Pk_XWUDs";
     const FOLDER_ID = "1IuVi--l_OwMDnKoc2_U2UB6pfLFygleb";
 
-    window.onload = async () => {
-      const nome = localStorage.getItem('usuarioNome') || 'Usuário';
-      document.getElementById('boasVindas').textContent = `Bem-vindo, ${nome}!`;
+    const i18nData = {
+      'pt-BR': {
+        title: "Bem-vindo",
+        welcome: "Bem-vindo, {nome}!",
+        selectPdf: "Selecione um arquivo PDF para visualizar:",
+        accessFile: "Acessar Arquivo",
+        selectPlaceholder: "-- Selecione --",
+        noFiles: "Nenhum PDF encontrado.",
+        errorLoad: "Erro ao carregar lista de arquivos.",
+        alertSelect: "Selecione um arquivo.",
+      },
+      'en': {
+        title: "Welcome",
+        welcome: "Welcome, {nome}!",
+        selectPdf: "Select a PDF file to view:",
+        accessFile: "Open File",
+        selectPlaceholder: "-- Select --",
+        noFiles: "No PDFs found.",
+        errorLoad: "Error loading file list.",
+        alertSelect: "Please select a file.",
+      }
+    };
+
+    let currentLang = 'pt-BR';
+
+    function translatePage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      // Change title
+      document.title = i18nData[lang].title;
+
+      // Change text elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if(key === "welcome"){
+          const nome = localStorage.getItem('usuarioNome') || (lang === 'pt-BR' ? 'Usuário' : 'User');
+          el.textContent = i18nData[lang][key].replace('{nome}', nome);
+        } else {
+          el.textContent = i18nData[lang][key];
+        }
+      });
+
+      // Change select placeholder
+      const lista = document.getElementById('lista');
+      if(lista.options.length > 0) lista.options[0].textContent = i18nData[lang].selectPlaceholder;
+
+      // Highlight language buttons
+      document.getElementById('btn-pt').classList.toggle('bg-yellow-400', lang === 'pt-BR');
+      document.getElementById('btn-pt').classList.toggle('text-black', lang === 'pt-BR');
+      document.getElementById('btn-en').classList.toggle('bg-yellow-400', lang === 'en');
+      document.getElementById('btn-en').classList.toggle('text-black', lang === 'en');
+    }
+
+    // Language buttons event
+    document.getElementById('btn-pt').addEventListener('click', () => {
+      translatePage('pt-BR');
+      gtag('event', 'language_switch', {language: 'pt-BR'});
+    });
+    document.getElementById('btn-en').addEventListener('click', () => {
+      translatePage('en');
+      gtag('event', 'language_switch', {language: 'en'});
+    });
+
+    async function carregarLista() {
+      const nome = localStorage.getItem('usuarioNome') || (currentLang === 'pt-BR' ? 'Usuário' : 'User');
+      document.getElementById('boasVindas').textContent = i18nData[currentLang].welcome.replace('{nome}', nome);
+
+      const lista = document.getElementById('lista');
+      const spinner = document.getElementById('spinner');
+      const btnAcessar = document.getElementById('btn-acessar');
+
+      // Limpar opções e desabilitar select e botão
+      lista.innerHTML = '';
+      btnAcessar.disabled = true;
+      lista.disabled = true;
+      
+      // Mostrar spinner
+      spinner.classList.remove('hidden');
 
       try {
-        const endpoint = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType
+        const endpoint = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}'+in+parents+and+mimeType='application/pdf'&key=${API_KEY}&fields=files(id,name)`;
+        const res = await fetch(endpoint);
+        const data = await res.json();
+
+        lista.innerHTML = '';
+
+        if (!data.files || data.files.length === 0) {
+          const opt = document.createElement("option");
+          opt.textContent = i18nData[currentLang].noFiles;
+          opt.disabled = true;
+          lista.appendChild(opt);
+          return;
+        }
+
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = i18nData[currentLang].selectPlaceholder;
+        lista.appendChild(placeholder);
+
+        data.files.forEach(file => {
+          const opt = document.createElement('option');
+          opt.value = file.id;
+          opt.textContent = file.name;
+          lista.appendChild(opt);
+        });
+
+        lista.disabled = false;
+      } catch (error) {
+        alert(i18nData[currentLang].errorLoad);
+        console.error(error);
+      } finally {
+        spinner.classList.add('hidden');
+      }
+    }
+
+    document.getElementById('lista').addEventListener('change', () => {
+      const btnAcessar = document.getElementById('btn-acessar');
+      btnAcessar.disabled = !document.getElementById('lista').value;
+    });
+
+    function abrirItemSelecionado() {
+      const id = document.getElementById('lista').value;
+      if (!id) {
+        alert(i18nData[currentLang].alertSelect);
+        return;
+      }
+      window.open(`https://drive.google.com/file/d/${id}/preview`, '_blank');
+      gtag('event', 'open_pdf', { file_id: id });
+    }
+
+    // Inicializa página com linguagem padrão pt-BR
+    translatePage('pt-BR');
+    carregarLista();
+  </script>
+</body>
+</html>
