@@ -42,6 +42,7 @@
       try {
         const res = await fetch(endpoint);
         const data = await res.json();
+        console.log("Arquivos recebidos:", data.files);
         const lista = document.getElementById('lista');
 
         if (!data.files || data.files.length === 0) {
