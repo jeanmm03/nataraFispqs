@@ -34,7 +34,7 @@
 
     window.onload = async () => {
       const nome = localStorage.getItem('usuarioNome') || 'Usuário';
-      document.getElementById('boasVindas').textContent = `Bem-vindo, ${nome}!`;
+      document.getElementById('boasVindas').textContent = `👋Bem-vindo, usuário! `;
     
       try {
         const query = encodeURIComponent(`'${FOLDER_ID}' in parents and mimeType='application/pdf' and trashed=false`);
