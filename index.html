@@ -59,10 +59,13 @@
           return;
         }
     
+        // Ordena os arquivos por nome (case-insensitive)
+        data.files.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR', { sensitivity: 'base' }));
+        
         data.files.forEach(file => {
           const opt = document.createElement('option');
           opt.value = file.id;
-          opt.textContent = file.name;
+          opt.textContent = `📄 ${file.name}`;
           lista.appendChild(opt);
         });
       } catch (error) {
