@@ -9,9 +9,49 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    /* Modal */
+    #modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #modalContent {
+      position: relative;
+      width: 90%;
+      max-width: 900px;
+      height: 90%;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    #modal iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    #closeBtn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;
+    }
   </style>
 </head>
 <body class="bg-gradient-to-br from-yellow-100 to-white flex items-center justify-center min-h-screen px-4">
+
   <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center">
     <h2 id="boasVindas" class="text-3xl font-semibold text-gray-800 mb-4">Bem-vindo!</h2>
     <p class="text-gray-600 mb-6">Selecione um arquivo para visualizar:</p>
@@ -28,59 +68,71 @@
     </button>
   </div>
 
-  <script>
-    const API_KEY = "AIzaSyDZhrfrzgn0PzfnkWQzOx6iu_6Pk_XWUDs";
-    const FOLDER_ID = "1IuVi--l_OwMDnKoc2_U2UB6pfLFygleb";
+  <!-- Modal para visualizar PDF -->
+  <div id="modal" class="flex">
+    <div id="modalContent">
+      <button id="closeBtn" onclick="fecharModal()">X</button>
+      <iframe id="pdfFrame" src=""></iframe>
+    </div>
+  </div>
 
+  <script>
     window.onload = async () => {
       const nome = localStorage.getItem('usuarioNome') || 'Usuário';
-      document.getElementById('boasVindas').textContent = `👋Bem-vindo, usuário! `;
-    
+      document.getElementById('boasVindas').textContent = `👋 Bem-vindo, ${nome}!`;
+
       try {
-        const query = encodeURIComponent(`'${FOLDER_ID}' in parents and mimeType='application/pdf' and trashed=false`);
-        const endpoint = `https://www.googleapis.com/drive/v3/files?q=${query}&key=${API_KEY}&fields=files(id,name)&supportsAllDrives=true&includeItemsFromAllDrives=true`;
-    
-        const res = await fetch(endpoint);
-    
-        if (!res.ok) {
-          throw new Error(`Erro na requisição: ${res.status}`);
-        }
-    
+        // Buscar JSON manual
+        const res = await fetch('arquivos.json');
+        if (!res.ok) throw new Error(`Erro ao buscar JSON: ${res.status}`);
         const data = await res.json();
-        console.log("Arquivos recebidos:", data.files);
-    
         const lista = document.getElementById('lista');
-    
-        if (!data.files || data.files.length === 0) {
+
+        if (!data || data.length === 0) {
           const opt = document.createElement("option");
           opt.textContent = "Nenhum PDF encontrado.";
           opt.disabled = true;
           lista.appendChild(opt);
           return;
         }
-    
-        // Ordena os arquivos por nome (case-insensitive)
-        data.files.sort((a, b) => a.name.localeCompare(b.name, 'pt-BR', { sensitivity: 'base' }));
-        
-        data.files.forEach(file => {
+
+        // Ordena os arquivos pelo nome
+        data.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', { sensitivity: 'base' }));
+
+        // Preenche a lista
+        data.forEach(file => {
           const opt = document.createElement('option');
-          opt.value = file.id;
-          opt.textContent = `📄 ${file.name}`;
+          opt.value = file.caminho;
+          opt.textContent = `📄 ${file.nome}`;
           lista.appendChild(opt);
         });
+
       } catch (error) {
         alert("Erro ao carregar lista de arquivos.");
         console.error("Erro detalhado:", error);
       }
     };
 
-      function abrirItemSelecionado() {
-        const lista = document.getElementById('lista');
-        const id = lista.value;
-        if (!id) return alert("Selecione um arquivo.");
-        window.open(`https://drive.google.com/file/d/${id}/preview`, '_blank');
-        lista.value = ""; // Limpa a seleção após abrir
-      }
+    function abrirItemSelecionado() {
+      const lista = document.getElementById('lista');
+      const caminho = lista.value;
+      if (!caminho) return alert("Selecione um arquivo.");
+
+      // Mostrar modal com PDF
+      const modal = document.getElementById('modal');
+      const frame = document.getElementById('pdfFrame');
+      frame.src = caminho;
+      modal.style.display = 'flex';
+    }
+
+    function fecharModal() {
+      const modal = document.getElementById('modal');
+      const frame = document.getElementById('pdfFrame');
+      frame.src = ""; // Limpa para parar carregamento
+      modal.style.display = 'none';
+      document.getElementById('lista').value = ""; // limpa seleção
+    }
   </script>
+
 </body>
 </html>
