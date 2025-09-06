@@ -1,144 +1,340 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DE SANTA - ARQUIVOS</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DE SANTA - CLIENTES</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#fef3c7; }
 
-    /* Modal estilizado */
-    #modal {
-      display: none;
-      position: fixed;
-      top:0; left:0;
-      width:100%;
-      height:100%;
-      background: rgba(0,0,0,0.8);
-      justify-content:center;
-      align-items:center;
-      z-index: 1000;
-      animation: fadeIn 0.3s ease;
-    }
+  /* Scroll containers */
+  .scroll-vertical { max-height:300px; overflow-y:auto; padding-right:4px; }
+  .scroll-vertical::-webkit-scrollbar { width:6px; }
+  .scroll-vertical::-webkit-scrollbar-thumb { background:rgba(107,114,128,0.5); border-radius:4px; }
 
-    #modal iframe {
-      width: 90%;
-      height: 90%;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      background: #fff;
-      animation: scaleIn 0.3s ease;
-    }
+  /* Modal */
+  .modal {
+    position: fixed; top:0; left:0; right:0; bottom:0;
+    display:none; justify-content:center; align-items:center;
+    background: rgba(0,0,0,0.6); z-index:1000;
+    animation: fadeIn 0.3s ease;
+  }
+  .modal-content {
+    background:white; width:90%; max-width:600px;
+    border-radius:12px; padding:20px; box-shadow:0 5px 20px rgba(0,0,0,0.4);
+    transform: scale(0.9); animation: scaleIn 0.3s forwards;
+    max-height:80vh; overflow-y:auto;
+  }
+  .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+  .modal-header button { background:#f87171; color:white; border:none; padding:4px 10px; border-radius:9999px; cursor:pointer; }
+  .modal-header button:hover { background:#ef4444; }
+  .filter-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+  .filter-tags button { padding:4px 10px; border-radius:9999px; border:none; cursor:pointer; transition:all 0.2s; }
+  .filter-tags button.active { font-weight:bold; box-shadow:0 0 5px rgba(0,0,0,0.3); }
+  .search-input { width:100%; padding:8px 10px; margin-bottom:12px; border:1px solid #ccc; border-radius:8px; }
 
-    #modal button {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: #f87171; /* vermelho Tailwind */
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.2s ease;
-    }
+  /* File card como botão */
+  .file-card {
+    padding:12px; border-radius:10px; margin-bottom:8px;
+    cursor:pointer; transition:all 0.2s;
+    display:flex; justify-content:flex-start; align-items:center;
+    background:#facc15; color:#000;
+  }
+  .file-card:hover { background:#f59e0b; transform:scale(1.01); }
+  .file-card span {
+    display:block; white-space:nowrap;
+    overflow-x:auto; max-width:100%;
+  }
 
-    #modal button:hover {
-      background: #ef4444;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    @keyframes scaleIn {
-      from {transform: scale(0.8);}
-      to {transform: scale(1);}
-    }
-  </style>
+  @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+  @keyframes scaleIn { from {transform:scale(0.9);} to {transform:scale(1);} }
+</style>
 </head>
-<body class="bg-gradient-to-br from-yellow-100 to-white flex items-center justify-center min-h-screen px-4">
+<body class="flex items-center justify-center min-h-screen px-4">
   <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center">
-    <h2 id="boasVindas" class="text-3xl font-semibold text-gray-800 mb-4">Bem-vindo!</h2>
-    <p class="text-gray-600 mb-6">Selecione um arquivo para visualizar:</p>
+    <h2 class="text-3xl font-semibold text-gray-800 mb-6">Escolha um cliente:</h2>
+    <div class="flex flex-col gap-4 scroll-vertical">
+      <button onclick="abrirModal('3M')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">3M</button>
+      <button onclick="abrirModal('Anastácio')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Anastácio</button>
+      <button onclick="abrirModal('Arkema')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Arkema</button>
+      <button onclick="abrirModal('BBraun')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">BBraun</button>
+      <button onclick="abrirModal('Direct Beauty')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Direct Beauty</button>
+      <button onclick="abrirModal('Kao Brasil')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Kao Brasil</button>
+      <button onclick="abrirModal('KASVI')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">KASVI</button>
+      <button onclick="abrirModal('Katec')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Katec</button>
+      <button onclick="abrirModal('Maian')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Maian</button>
+      <button onclick="abrirModal('Mundiquimica')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Mundiquimica</button>
+      <button onclick="abrirModal('Natara')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Natara</button>
+      <button onclick="abrirModal('NPS')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">NPS</button>
+      <button onclick="abrirModal('Produtos de Limpeza')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Produtos de Limpeza</button>
+      <button onclick="abrirModal('QuimiNutri IGM')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">QuimiNutri IGM</button>
+      <button onclick="abrirModal('Sinergy')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Sinergy</button>
+      <button onclick="abrirModal('Tetra Pak')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Tetra Pak</button>
+      <button onclick="abrirModal('Tilley do Brasil')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Tilley do Brasil</button>
+      <button onclick="abrirModal('Wego')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Wego</button>
+      <button onclick="abrirModal('Weleda')" class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500">Weleda</button>
 
-    <select id="lista" class="w-full border border-gray-300 rounded-lg p-3 mb-6 text-gray-700 focus:ring-yellow-400 focus:outline-none transition duration-150 ease-in-out">
-      <option value="">-- Selecione --</option>
-    </select>
-
-    <button
-      onclick="abrirItemSelecionado()"
-      class="w-full bg-yellow-400 text-black font-medium py-3 rounded-lg hover:bg-yellow-500 transition duration-200 ease-in-out"
-    >
-      Acessar Arquivo
-    </button>
+      <!-- Pode adicionar mais clientes -->
+    </div>
   </div>
 
-  <!-- Modal para exibir PDF -->
-  <div id="modal" class="flex">
-    <iframe id="iframePDF"></iframe>
-    <button onclick="fecharModal()">✖ Fechar</button>
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="clienteNome">Cliente</h3>
+        <button onclick="fecharModal()">✖</button>
+      </div>
+      <div class="filter-tags" id="filtrosContainer"></div>
+      <input type="text" id="searchInput" class="search-input" placeholder="Buscar arquivo..." oninput="atualizarArquivos()">
+      <div id="arquivosContainer" class="scroll-vertical"></div>
+    </div>
   </div>
 
 <script>
-  window.onload = async () => {
-    const nome = localStorage.getItem('usuarioNome') || 'Usuário';
-    document.getElementById('boasVindas').textContent = `👋 Bem-vindo, ${nome}!`;
-
-    try {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbwHr0kRQPf9FEY214b1Uixqo3U4AKgDzc_QPabKjcTVmlHGzLBoMBjJLhyY595I6uJckQ/exec'); 
-      if (!res.ok) throw new Error(`Erro ao buscar JSON: ${res.status}`);
-
-      const data = await res.json();
-      const lista = document.getElementById('lista');
-
-      if (!data || data.length === 0) {
-        const opt = document.createElement("option");
-        opt.textContent = "Nenhum PDF encontrado.";
-        opt.disabled = true;
-        lista.appendChild(opt);
-        return;
-      }
-
-      data.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', { sensitivity: 'base' }));
-
-      data.forEach(file => {
-        const opt = document.createElement('option');
-        opt.value = file.caminho; // já está no formato Google Docs Viewer
-        opt.textContent = `📄 ${file.nome}`;
-        lista.appendChild(opt);
-      });
-
-    } catch (error) {
-      alert("Erro ao carregar lista de arquivos.");
-      console.error("Erro detalhado:", error);
-    }
-  };
-
-  function abrirItemSelecionado() {
-    const lista = document.getElementById('lista');
-    const caminho = lista.value;
-    if (!caminho) return alert("Selecione um arquivo.");
-
-    const modal = document.getElementById('modal');
-    const iframe = document.getElementById('iframePDF');
-
-    iframe.src = caminho; // abre o PDF no modal usando Google Docs Viewer
-    modal.style.display = "flex";
+const clientes = {
+  "Anastácio": {
+    filtros: ["Todos","Inflamáveis","Não Inflamáveis"],
+    arquivos: [
+      {nome:"Arquivo 1 muito grande para testar scroll horizontal", tipo:"Inflamáveis"},
+      {nome:"Arquivo 2", tipo:"Não Inflamáveis"},
+      {nome:"Arquivo 3", tipo:"Inflamáveis"},
+      {nome:"Arquivo 4", tipo:"Não Inflamáveis"},
+      {nome:"Arquivo 5", tipo:"Inflamáveis"},
+      {nome:"Acabamento", tipo:"Inflamáveis"},
+      {nome:"Teste de linha", tipo:"Inflamáveis"},
+      {nome:"Trabalho", tipo:"Inflamáveis"},
+      {nome:"Compreender", tipo:"Inflamáveis"},
+      {nome:"Falar bobeira", tipo:"Inflamáveis"},
+      {nome:"Arquivo 5", tipo:"Inflamáveis"},
+      {nome:"Arquivo 5", tipo:"Inflamáveis"}
+    ]
+  },
+  "Arkema": {
+    filtros: ["Todos"],
+    arquivos: [
+      {nome:"Arquivo 1 muito grande para testar scroll horizontal", tipo:"Inflamáveis"},
+      {nome:"Arquivo 2", tipo:"Não Inflamáveis"},
+      {nome:"Arquivo 3", tipo:"Inflamáveis"},
+      {nome:"Arquivo 4", tipo:"Não Inflamáveis"},
+      {nome:"Arquivo 5", tipo:"Inflamáveis"}
+    ]
+  },
+  "3M": {
+    filtros:["Todos","SDS Matéria Prima","SDS Químicos"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"SDS Matéria Prima"},
+      {nome:"Arquivo B", tipo:"SDS Químicos"},
+      {nome:"Arquivo C", tipo:"SDS Matéria Prima"},
+      {nome:"Arquivo D", tipo:"SDS Químicos"},
+      {nome:"Arquivo E", tipo:"SDS Matéria Prima"}
+    ]
+  },
+  "BBraun": {
+    filtros:["Todos","BULAS","Cosméticos","FICHA EMERGÊNCIA","Inflamáveis","Saneantes"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "Direct Beauty": {
+    filtros:["Todos"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "Kao Brasil": {
+    filtros:["Todos","Aminas e Seus Derivados","Inflamáveis"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "KASVI": {
+    filtros:["Todos","Inflamáveis"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "Katec": {
+    filtros:["Todos"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "Maian": {
+    filtros:["Todos"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "Natara": {
+    filtros:["Todos","Descartáveis","Inflamáveis"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "NPS": {
+    filtros:["Todos","Obsoleto"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "Produtos de Limpeza": {
+    filtros:["Todos","Inflamáveis"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "QuimiNutri IGM": {
+    filtros:["Todos","Ficha de Emergência","Inflamáveis"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "Sinergy": {
+    filtros:["Todos"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "Tetra Pak": {
+    filtros:["Todos","Ficha de Emergência","Inflamáveis"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "Tilley do Brasil": {
+    filtros:["Todos"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "Wego": {
+    filtros:["Todos"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
+  },
+  "Weleda": {
+    filtros:["Todos"],
+    arquivos:[
+      {nome:"Arquivo A", tipo:"BULAS"},
+      {nome:"Arquivo B", tipo:"Cosméticos"},
+      {nome:"Arquivo C", tipo:"Saneantes"},
+      {nome:"Arquivo D", tipo:"BULAS"},
+      {nome:"Arquivo E", tipo:"Cosméticos"}
+    ]
   }
+};
 
-  function fecharModal() {
-    const modal = document.getElementById('modal');
-    const iframe = document.getElementById('iframePDF');
-    iframe.src = ""; // limpa o PDF
-    modal.style.display = "none";
-  }
+let filtroAtivo = "Todos";
+let clienteAtual = "";
+
+function abrirModal(cliente) {
+  clienteAtual = cliente;
+  filtroAtivo = "Todos";
+  document.getElementById('modal').style.display='flex';
+  document.getElementById('clienteNome').textContent=cliente;
+
+  const filtrosDiv = document.getElementById('filtrosContainer');
+  filtrosDiv.innerHTML = "";
+  clientes[cliente].filtros.forEach(filtro=>{
+    const btn = document.createElement('button');
+    btn.textContent = filtro;
+    btn.className = filtro===filtroAtivo?"active":"";
+    btn.onclick = () => { filtroAtivo=filtro; atualizarFiltro(); };
+    filtrosDiv.appendChild(btn);
+  });
+
+  document.getElementById('searchInput').value = "";
+  atualizarArquivos();
+}
+
+function fecharModal() { document.getElementById('modal').style.display='none'; }
+
+function atualizarFiltro() {
+  const buttons = document.querySelectorAll('.filter-tags button');
+  buttons.forEach(b=>b.classList.remove('active'));
+  const btnAtivo = Array.from(buttons).find(b=>b.textContent===filtroAtivo);
+  if(btnAtivo) btnAtivo.classList.add('active');
+  atualizarArquivos();
+}
+
+function atualizarArquivos() {
+  const container = document.getElementById('arquivosContainer');
+  container.innerHTML="";
+  const searchText = document.getElementById('searchInput').value.toLowerCase();
+
+  const arquivos = clientes[clienteAtual].arquivos.filter(a=>{
+    const matchFiltro = filtroAtivo==="Todos"||a.tipo===filtroAtivo;
+    const matchSearch = a.nome.toLowerCase().includes(searchText);
+    return matchFiltro && matchSearch;
+  });
+
+  arquivos.forEach(a=>{
+    const div = document.createElement('div');
+    div.className = 'file-card';
+    div.innerHTML = `<span>${a.nome}</span>`;
+    div.onclick = () => { alert(`Abrir: ${a.nome}`); }; // todo card clicável
+    container.appendChild(div);
+  });
+}
 </script>
 </body>
 </html>
