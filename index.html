@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -5,107 +7,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DE SANTA - FISPQS DOS CLIENTES</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    /* ===== Scrollbar global ===== */
-    ::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #fff9c4;   /* amarelo bem claro */
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #facc15;   /* amarelo vivo (Tailwind yellow-400) */
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #eab308;   /* amarelo mais escuro (Tailwind yellow-500) */
-    }
-
-    /* ===== Scrollbar só dentro do modal de arquivos ===== */
-    #arquivosContainer::-webkit-scrollbar {
-      width: 8px;
-    }
-    #arquivosContainer::-webkit-scrollbar-thumb {
-      background: #facc15;
-      border-radius: 8px;
-    }
-    #arquivosContainer::-webkit-scrollbar-thumb:hover {
-      background: #eab308;
-    }
-  </style>
-
 </head>
+
 <body class="flex items-center justify-center min-h-screen bg-yellow-100 px-4">
   <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center">
-    <h2 id="greeting" class="text-3xl font-semibold text-gray-800 mb-6"></h2>
-    <h1 class="text-2xl text-gray-800 mb-6">Escolha um dos clientes abaixo:</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-8">Selecione a unidade:</h1>
 
+    <div class="flex flex-col gap-4">
+      <button 
+        onclick="window.location.href='home.html'"
+        class="w-full py-3 text-lg font-semibold bg-yellow-400 hover:bg-yellow-500 text-white rounded-xl transition">
+        OSASCO / SUMARÉ
+      </button>
 
-<button onclick="window.location.href='home.html'"
-  class="absolute left-4 top-4 w-8 h-8 flex items-center justify-center 
-         bg-white border border-yellow-500 rounded-full shadow-sm
-         text-yellow-600 text-lg font-bold hover:bg-yellow-200 transition">
-  ←
-</button>
-
-
-
-    <!-- Lista de clientes -->
-    <div id="clientesContainer" class="flex flex-col gap-4 max-h-80 overflow-y-auto pr-1"></div>
-  </div>
-
-  <!-- Modal Cliente -->
-  <div id="modal" class="hidden fixed inset-0 flex items-center justify-center bg-black/60 z-50">
-    <div class="bg-white rounded-xl shadow-lg p-6 w-11/12 max-w-lg max-h-[80vh] overflow-y-auto">
-      <div class="flex justify-between items-center mb-4">
-        <h3 id="clienteNome" class="text-lg font-semibold"></h3>
-        <button onclick="fecharModal()" aria-label="Fechar"
-        class="text-red-500 text-xl font-bold px-3 py-1 rounded-full transition">✖</button>
-
-      </div>
-
-      <!-- Busca -->
-      <input id="searchInput" type="text" placeholder="Buscar arquivo..."
-        class="w-full border rounded-lg px-3 py-2 mb-3"
-        oninput="debounce(atualizarArquivos, 300)()" />
-
-      <!-- Lista arquivos -->
-      <div id="arquivosContainer" class="space-y-2"></div>
+      <button 
+        onclick="window.location.href='index2.html'"
+        class="w-full py-3 text-lg font-semibold bg-yellow-600 hover:bg-yellow-700 text-white rounded-xl transition">
+        PERNAMBUCO
+      </button>
     </div>
   </div>
 
-<!-- Modal PDF em tela cheia -->
-<div id="pdfModal" class="hidden fixed inset-0 z-50 bg-black">
-  <button onclick="fecharPDFModal()" 
-    class="absolute top-4 right-4 w-12 h-12 bg-red-500 hover:bg-red-600 text-white text-2xl rounded-lg shadow z-50">
-    X
-  </button>
-  <iframe id="pdfFrame" class="w-full h-full border-0"></iframe>
-</div>
-
-
-  <script src="data.js"></script>
-  <script src="app.js"></script>
-
-<footer style="
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 12px;
-  color: #FFD700; /* amarelo */
-  background: transparent;
-  padding: 8px 0;
-">
-  <a href="mailto:jean.marques@desantalog.com.br" style="text-decoration: none; color: #FFD700;">
+<footer class="fixed bottom-0 left-0 w-full text-center text-xs text-yellow-500 py-2">
+  <a href="mailto:jean.marques@desantalog.com.br" class="no-underline text-yellow-500">
     Desenvolvedor Jean Marques<span style="font-size:10px; vertical-align:super;">®</span>
   </a>
 </footer>
-  
 </body>
 </html>
-
 
