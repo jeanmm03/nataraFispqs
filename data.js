@@ -711,13 +711,6 @@ const clientes = {
       {nome:"FISPQ-QUATERNÁRIO DE AMÔNIO 50- ONU 1993", tipo:"Todos", fileId:"18bLivnOi6iKIGtq_OSwV30XHt1N1rHBa"}
     ]
   },
-  "PAE": {
-    filtros: ["Todos"], arquivos: [
-      {nome:"PAE Externo Ambipar - 24.02.2025.pdf", tipo:"Todos", fileId:"1oZezNi-xzCOxDnkp_IX0HF9RSTJfmBE0"},
-      {nome:"PAE Interno (rev05 08.10.2025).pdf", tipo:"Todos", fileId:"13k7A15WyEbhVuBKp3w4XVLJnlkg9hLe4"},
-      {nome:"PAE Segurança Viária (rev03 02.04.2025) .pdf", tipo:"Todos", fileId:"1wvC6POqPgPnQFHx-61FxWbbbY3_4Sxju"}
-    ]
-  },
 
   "Mundiquimica": {
     filtros: ["Todos"], arquivos: [
@@ -1574,8 +1567,6 @@ const clientes = {
       {nome:"YERBA SANTA SE FR NATARA 2025", tipo:"Todos", fileId:"1RPV0Sd1i6dz0EHcewCRS4JAqxO0kQgMR"},
       {nome:"YLANG YLANG OIL 442FP23107 - 442FP23343.09", tipo:"Todos", fileId:"1_DMtEkzaNri_XGDbun2J3BYtDPuk1PLA"},
       {nome:"YLANG YLANG OIL NATARA 2025", tipo:"Todos", fileId:"1QfUL0wB-5OpQwodLp__GemK3UiOlD1Ei"}
-
-
     ]
   },
 
@@ -1888,7 +1879,13 @@ const clientes = {
       {nome:"Valsartana", tipo:"Todos", fileId:"1iKsHEWqMluQm01UwpcW7df0k5c_MB14E"}
     ]
   },
-
+  "PAE": {
+    filtros: ["Todos"], arquivos: [
+      {nome:"PAE Externo Ambipar - 24.02.2025.pdf", tipo:"Todos", fileId:"1oZezNi-xzCOxDnkp_IX0HF9RSTJfmBE0"},
+      {nome:"PAE Interno (rev05 08.10.2025).pdf", tipo:"Todos", fileId:"13k7A15WyEbhVuBKp3w4XVLJnlkg9hLe4"},
+      {nome:"PAE Segurança Viária (rev03 02.04.2025) .pdf", tipo:"Todos", fileId:"1wvC6POqPgPnQFHx-61FxWbbbY3_4Sxju"}
+    ]
+  },
   "Produtos de Limpeza": {
     filtros: ["Todos"], arquivos: [
       {nome:"Água_Sanitária_Candura", tipo:"Todos", fileId:"1lyy72ykokUbfH-MM4qJYXy6_oaMff1mu"},
@@ -2029,6 +2026,7 @@ const clientes = {
 
 
 };  
+
 
 
 
