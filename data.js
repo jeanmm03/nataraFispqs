@@ -1881,9 +1881,10 @@ const clientes = {
   },
   "PAE": {
     filtros: ["Todos"], arquivos: [
-      {nome:"PAE Externo Ambipar - 24.02.2025.pdf", tipo:"Todos", fileId:"1oZezNi-xzCOxDnkp_IX0HF9RSTJfmBE0"},
-      {nome:"PAE Interno (rev05 08.10.2025).pdf", tipo:"Todos", fileId:"13k7A15WyEbhVuBKp3w4XVLJnlkg9hLe4"},
-      {nome:"PAE Segurança Viária (rev03 02.04.2025) .pdf", tipo:"Todos", fileId:"1wvC6POqPgPnQFHx-61FxWbbbY3_4Sxju"}
+      {nome:"OG_PAE_Interno_Assinado_revisão 06. - CONTROLADA", tipo:"Todos", fileId:"1EkdZ3Ipoj1JkgFjO1u5SAslY4oYsoNux"},
+      {nome:"PAE Externo Ambipar - 24.02.2025", tipo:"Todos", fileId:"1oZezNi-xzCOxDnkp_IX0HF9RSTJfmBE0"},
+      {nome:"PAE Interno (rev05 08.10.2025)", tipo:"Todos", fileId:"13k7A15WyEbhVuBKp3w4XVLJnlkg9hLe4"},
+      {nome:"PAE Segurança Viária (rev03 02.04.2025) ", tipo:"Todos", fileId:"1wvC6POqPgPnQFHx-61FxWbbbY3_4Sxju"}
     ]
   },
   "Produtos de Limpeza": {
@@ -2027,6 +2028,7 @@ const clientes = {
 
 
 };  
+
 
 
 
