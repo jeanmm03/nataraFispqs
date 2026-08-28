@@ -1955,11 +1955,24 @@ const clientes = {
     ]
   },
 
-  "Sinergy": {
+    "Sinergy": {
     filtros: ["Todos"], arquivos: [
       {nome:"DI.U09.001E - MATERIAL SAFETY DATA SHEET - COLD PRESSED ORANGE OIL - REV000", tipo:"Todos", fileId:"1IXOfLwicDQenpvAt-2P0HKT-mcTAyIGd"},
       {nome:"Etanol - Álcool Etílico", tipo:"Todos", fileId:"1mqHXR8ky8iM0lAXNQVZAA1RPu6VU5c2W"},
       {nome:"FISPQ - Etanol - Álcool Etílico", tipo:"Todos", fileId:"1DiRKkZFgS_u12P4kIFas6eMSjc0aYyJw"}
+    ]
+  },
+
+  "Solventum": {
+    filtros: ["Todos"], arquivos: [
+      {nome:"SDS_30-6207-2_Brazil -  Single Bond Universal  (Intermediário).pdf", tipo:"Todos", fileId:"1-vWV8ORWByh7XHciQ4M4fOcfsMzmg2-k"},
+      {nome:"SDS_46-0838-6_Brazil - 4-(Dimethylamino)phenethyl alcohol.pdf", tipo:"Todos", fileId:"1t3ALr0e15AIX8HX9kZn5TAqxuOEobq5c"},
+      {nome:"SDS_43-8154-7_Brazil - RELYX ARC A1 e A3 PASTA A - MIXER.pdf", tipo:"Todos", fileId:"1A8NcgowQgZ2_m4iUr67anljqum8YBCg3"},
+      {nome:"SDS_40-6706-2_Brazil - No Sting Barrier Polymer Spray, R-24610.pdf", tipo:"Todos", fileId:"1EnpINm1DsKGck61PCnELWly8KGBmx1Bf"},
+      {nome:"SDS_39-8391-3_Brazil - AttestT Indutor Quimico Retangular PCD 1243R  (Intermediário).pdf", tipo:"Todos", fileId:"1PvYdo6dVCeE1dipae8MYPTodKyJa2fvN"},
+      {nome:"SDS_34-7059-8 _Brazil - RELYX ARC PASTA B.pdf", tipo:"Todos", fileId:"1VVmv4Fc5m8j1_yBy1hAx32WkiAoensxy"},
+      {nome:"SDS_32-7460-2 _Brazil - 3MT CavilonT Creme Barreira Durável 3353, 3354, 3355, 3391C, 3391G, 3392G, 3392GS.pdf", tipo:"Todos", 
+      {nome:"Ficha de Segurança - Detergente Multienzimático- SOLVENTUM.pdf", tipo:"Todos", fileId:"1t55LVk5sqlRKhvJ-ZJjluAemq5bbO6GC"}
     ]
   },
 
