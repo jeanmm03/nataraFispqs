@@ -1379,6 +1379,33 @@ const clientes = {
       {nome:"Água_Sanitária_Candura", tipo:"Todos", fileId:"1lyy72ykokUbfH-MM4qJYXy6_oaMff1mu"}
     ]
   },
+  "Rezzolut": {
+    arquivos: [
+      {nome:"FDS.043 - Tubofloor 30 min (Parte B).pdf", tipo:"Todos", fileId:"1HoDxihJjgN58V7M3rXo4GPgR_bWCgnMu"},
+      {nome:"FDS.042 - Tubofloor 30 min (Parte A).pdf", tipo:"Todos", fileId:"1vOYvyegFW-Wo5a9s2VEj4jJXO10i0Mf1"},
+      {nome:"FDS.041 - Tubofloor 12 min (Parte B).pdf", tipo:"Todos", fileId:"1CaQLoGBY7tiFo60z8caVWFcSwZTGoRdj"},
+      {nome:"FDS.040 - Tubofloor 12 min (Parte A).pdf", tipo:"Todos", fileId:"1-tCXj-k4YJpZX4QRusPymzIGl0K-tW2h"},
+      {nome:"FDS.039 - Tuboli MOP 1000 (1 L).pdf", tipo:"Todos", fileId:"1z_m_93RH0vc3GPXPde4wWT7EgqoASYAU"},
+      {nome:"FDS.037 e 038 - Epolit Adesivo Estrutural TIX.pdf", tipo:"Todos", fileId:"1njHgBUop1ZUq4keTS-bVyVbIi41-X_0o"},
+      {nome:"FDS.035 e 036 - Epolit Adesivo Média Fuidez.pdf", tipo:"Todos", fileId:"1vJWPQKdjUz5mnKNgBVjKF_1_wipRl26n"},
+      {nome:"FDS.030 e 031 - Epolit Subaquática - 2025.pdf", tipo:"Todos", fileId:"1IwsvHAbkGuPzd8Pf_zzbO9v2oigXvzs8"},
+      {nome:"FDS.029 - Tubolit MOP 200 (20 L) - 2025.pdf", tipo:"Todos", fileId:"14C1CBEwBaV3Y2_OchSSRYh56x1O9fsYq"},
+      {nome:"FDS.028 - Tubolit MOP 200 (300 ml) - 2025.pdf", tipo:"Todos", fileId:"1MFwQY4xRGX1BZCNR0jCjP3Np6bOpTk-F"},
+      {nome:"FDS.027 - Tubolit DEM 048 - 2025.pdf", tipo:"Todos", fileId:"1o2xEKa7-qG9gL4ol6Hgs5cKuF-IY03Nu"},
+      {nome:"FDS.026 - Tubolit Fita de Proteção Mecânica - 2025.pdf", tipo:"Todos", fileId:"1_7fYsltik2ds_Yn4k-ch_sDMI5gMz6-M"},
+      {nome:"FDS.024 - Adesivo Imp. 9100 Rápido Standard (Parte A).pdf", tipo:"Todos", fileId:"1Fvx7owLuYW6Kvuo-I6eE23e4fzAf1J_L"},
+      {nome:"FDS.025 - Adesivo Imp. 9100 Rápido Standard (Parte B).pdf", tipo:"Todos", fileId:"1wfhbwYdYVRiZJMPMDCpO_r29pK7A2AoJ"},
+      {nome:"FDS.023 - Adesivo Imp. 5100 Rápido (Parte B).pdf", tipo:"Todos", fileId:"11QIO9v9kBZDPMFaZezeUXUjZsxWSfIs9"},
+      {nome:"FDS.022 - Adesivo Imp. 5100 Rápido (Parte A).pdf", tipo:"Todos", fileId:"1TjVgy3HiURJKu43MLzB7oAkVz2qibxlu"},
+      {nome:"FDS.021 - MEP 330 (Parte B) - 2025.pdf", tipo:"Todos", fileId:"114LEI7K8WLBLwOLywWK3NnAtXnCW2A-f"},
+      {nome:"FDS.020 - MEP 330 (Parte A) - 2025.pdf", tipo:"Todos", fileId:"1MekK_Av5b9sY6dnjNEFeDV1CgpK7Ma8o"},
+      {nome:"FDS.019 - Massa de Aparelhar (Parte B) - 2025.pdf", tipo:"Todos", fileId:"11M0dqGifUdE0OqnvMXkFVc2dczDcZezj"},
+      {nome:"FDS.018 - Massa de Aparelhar (Parte A) - 2025.pdf", tipo:"Todos", fileId:"1qIiFrJv9PHEVRfOGDTMzvsf71uwygj6N"},
+      {nome:"FDS.011 - Plasmet ZF - 2025.pdf", tipo:"Todos", fileId:"1TWMPjORKUkdAStsnvULjKi3E9MWREth_"},
+      {nome:"FDS.008 e 009 - Epolit Espatulável - 2025.pdf", tipo:"Todos", fileId:"18ZwdPhkpTR5GnkhpHXlrH9eWKn0UIfvh"},
+      {nome:"FDS.004 e 007 - MEP ; MEC ; MEM - 2025.pdf", tipo:"Todos", fileId:"1NTmYQzYBiSG9EdUytwvikMNaqQPzrnO9"}
+    ]
+  },
   "Solventum": {
     arquivos: [
       {nome:"Ficha de Segurança - Detergente Multienzimático- SOLVENTUM", tipo:"Todos", fileId:"1t55LVk5sqlRKhvJ-ZJjluAemq5bbO6GC"},
@@ -1447,6 +1474,44 @@ const clientes = {
       {nome:"PASSIFLORA ALATA, HERBA RECENS 1=3 ALCOOL 62% - MACERAÇÃO", tipo:"Todos", fileId:"1uqp80_SV_wDNFMr7QfvlXXLGSuyFb9eE"},
       {nome:"QUERCUS ROBUR CORTEX SICC 10% ALCOOL 30% - DECOCÇÃO", tipo:"Todos", fileId:"12URQQf0UT_B9kUVAaC6jACSIzZLtSTNF"},
       {nome:"VALERIANA OFFICINALIS RADIX SICC 10% ALCOOL 62% - DECOCÇÃO", tipo:"Todos", fileId:"1VHi3fMFWwUAhsz4g2qBMeAr3hBhMqbKQ"}
+    ]
+  },
+  "Yas": {
+    arquivos: [
+      {nome:"Sorbato de Potássio_FDS_REV00.pdf", tipo:"Todos", fileId:"1NyKD2s94K1LC5HvKJD4VvzIiEAiWCOsc"},
+      {nome:"RESINA EPS_FDS_REV00.pdf", tipo:"Todos", fileId:"1yvfUh5ioQa9I19WXingBwJGvh96rkqwh"},
+      {nome:"Paradiclorobenzeno_FDS_REV00 (2).pdf", tipo:"Todos", fileId:"16g5Zch0WgtPV7Iytbbke0isSJIb6mc-x"},
+      {nome:"Propionato de Cálcio_FDS_REV00 (2).pdf", tipo:"Todos", fileId:"11jJugmUt4lPeqdbrHvx0sARBL2ccqtMB"},
+      {nome:"FISPQ_Óleo Mineral_FDS_REV00.pdf", tipo:"Todos", fileId:"14eNzu1Gibg60SsmbO5fqc8IrVQACS6Tx"},
+      {nome:"FISPQ_ÓLEO DE GIRASSOL REFINADO_FDS_REV00.pdf", tipo:"Todos", fileId:"1ctGLruf2x7qivmUzly-_Y83JH1WXq6PV"},
+      {nome:"Naftalina_FDS_REV00.pdf", tipo:"Todos", fileId:"1tnwl0wL2LrW-Ta6zuydQJp2G1r1sO-w5"},
+      {nome:"MIRISTATO DE ISOPROPILA_FDS_REV00.pdf", tipo:"Todos", fileId:"1CFl_n_dsvzxXggoAC-Y6Nw2-weIei5CP"},
+      {nome:"Mentol_FDS_REV00.pdf", tipo:"Todos", fileId:"14n-3Hnueu0Ee3f8JNPvE-uELKMKGKAKW"},
+      {nome:"Lauril Eter Sulfato de Sódio 70_FDS_REV00 (1).pdf", tipo:"Todos", fileId:"1rb0XdYX7S5PfhjAPuTiQwt4-pJXeKaxK"},
+      {nome:"FISPQ_Lauril 27 Eter Sulfato de Sódio_FDS_REV00.pdf", tipo:"Todos", fileId:"1S50y-3_12CKFCHnH8eKUOcFApy_XDg37"},
+      {nome:"Lanolina_FDS_REV00.pdf", tipo:"Todos", fileId:"1JAN7jmueVCwWbXXruB77fsb5iUlom8MT"},
+      {nome:"ISODODECANO_FDS_REV00.pdf", tipo:"Todos", fileId:"1oy-NlrDbQ6BdnEzUVCFj0pq9kC2mTShl"},
+      {nome:"Hexametafosfato de Sódio_FDS_REV00.pdf", tipo:"Todos", fileId:"1KY83Lo5OUT2f6eqXypWqBtQQSfUEuYFV"},
+      {nome:"GLICERINA LOIRA_FDS_REV00.pdf", tipo:"Todos", fileId:"1jG6-Oiw0Rc2-bGF0tjTfyf0_FlRk7hTH"},
+      {nome:"Fenoxietanol_FDS_REV00.pdf", tipo:"Todos", fileId:"1TkEIk3ZVsZi-f2S-bpsTdevyQqzL7Jcf"},
+      {nome:"FDS DIOXIDO DE TITANIO R902_FDS_REV00.pdf", tipo:"Todos", fileId:"1irvMTqO3Q_Xbc6uJgIACzXWQirxp-LT3"},
+      {nome:"Tolueno Diisocianato - TDI_FDS_REV00.pdf", tipo:"Todos", fileId:"1B9-nu61f0Kj1ZMSvugJB77LLlHV9xgq_"},
+      {nome:"FISPQ_Dietanolamina_FDS_REV00.pdf", tipo:"Todos", fileId:"1O-MTVpPwCvLIB1YTDwNwNmLcbH6_nZeV"},
+      {nome:"DIMETILFORMAMIDA_FDS_REV00.pdf", tipo:"Todos", fileId:"1SdBqAvs20ARtlY6ToATljT-jjSUaFTMb"},
+      {nome:"DEET - N,N-DIETIL-META TOLUAMIDA_FDS_REV00 (1).pdf", tipo:"Todos", fileId:"1dxlX3WIr4YN02__LpDz-jgciMM0gLHHH"},
+      {nome:"Creatina_FDS_REV00.pdf", tipo:"Todos", fileId:"14HcWGutzEZTUeaqqQLomoz16SnD9nK9o"},
+      {nome:"FISPQ Coco Amido Propilbetaina (1).pdf", tipo:"Todos", fileId:"1BfWeJ0ut7_ma_It3F9RYPYvPWME_IA0J"},
+      {nome:"Cloreto de Metileno_FDS_REV00.pdf", tipo:"Todos", fileId:"15oHCvRoLeW5HqyyuDBx-XEq-7aMdxTO7"},
+      {nome:"Caprílico Cáprico Triglicerídeo_FDS_REV00.pdf", tipo:"Todos", fileId:"1mmA9XVwPPgREC6hm8M0JCtnr_4ofjq36"},
+      {nome:"Cânfora_FDS_REV00.pdf", tipo:"Todos", fileId:"1etBkKGwxxPUc9Xj4d6VobL2eMt-nuiz9"},
+      {nome:"FISPQ_Butil Glicol.pdf", tipo:"Todos", fileId:"1TzsqRz4qnmw6vBVfDPrH97a_2s_mo09h"},
+      {nome:"Benzoato de Sódio_FDS_REV00.pdf", tipo:"Todos", fileId:"1yfV3vDVmD5Wh1n6Yl1Xeo14g-4NWMePE"},
+      {nome:"Álcool Ceto-Estearílico_FDS_REV00 (1).pdf", tipo:"Todos", fileId:"1r7AK0Lm4IPnBakdgITx6HHa1jrhOSpWb"},
+      {nome:"Álcool Cetílico_FDS_REV00 (1).pdf", tipo:"Todos", fileId:"1JJwLV0_ySYzhUmkqpooCXUyAf2fnnnAg"},
+      {nome:"Ácido Fosfórico 85_FDS_REV00.pdf", tipo:"Todos", fileId:"1bXkz4Kdk8X9xwoDTGVyVWiD4d_6SIiy2"},
+      {nome:"Ácido Fosfórico 85_FE.pdf", tipo:"Todos", fileId:"1Je3A2V6jvX9nbLC0CqFVt-eKqDD3glnc"},
+      {nome:"Ácido Dimérico_FDS_REV00 (1).pdf", tipo:"Todos", fileId:"1rHP1ExylvmyPuQ9XCQtrEzm1MbP9eMm1"},
+      {nome:"FISPQ_Ácido bórico_FDS_REV00.pdf", tipo:"Todos", fileId:"1LJDQpgg0-QSyedtlggvLUHhNTmwP9tOj"}
     ]
   }
 };
